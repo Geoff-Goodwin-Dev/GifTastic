@@ -77,6 +77,7 @@ Not Applicable: This is a static website for educational purposes and therefore 
 ## Versioning
 
 * version 1.0 - Creation of file structure, site mechanics, and initial look and feel
+* version 1.1 - Refinement of app behavior and addition of persisting local storage
 
 ## Authors
 

@@ -5,6 +5,11 @@ $(document).ready(function() {
   generateButtons();
 
   function generateButtons() {
+    if (localStorage.getItem("storedTopicsList") !== null) {
+      let localStoredList = localStorage.getItem("storedTopicsList");
+      localStoredList = JSON.parse(localStoredList);
+      topics = localStoredList;
+    }
     for(let i = 0; i < topics.length; i++){
       let topicButton = $('<button/>', {
         text: topics[i],
@@ -114,12 +119,22 @@ $(document).ready(function() {
     if ((textBoxValue !== "") && (topics.includes(textBoxValue) === false)) {
       topics.push(textBoxValue);
       topics.sort();
-      // console.log(topics);
+      let stringedSearchArray = JSON.stringify(topics);
+      console.log(stringedSearchArray);
+      localStorage.setItem("storedTopicsList", stringedSearchArray);
       $("#addItemText").val("");
       $("#buttonContainer").empty();
       generateButtons();
     }
-
   });
 
+  //CLEAR ADDED ITEMS BUTTON
+  $("#clearAddedItems").on("click", function() {
+    if (confirm("Are you sure you wish to remove all the manually added search terms?") === true){
+      localStorage.clear();
+      $("#buttonContainer").empty();
+      topics = ["bass", "cello", "drums", "guitar", "keyboards", "vocals"];
+      generateButtons();
+    }
+  });
 });
